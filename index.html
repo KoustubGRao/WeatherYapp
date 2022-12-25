@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <!-- <script src= "https://cdn. jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script> -->
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles_h.css">
+    <script src="https://kit.fontawesome.com/45f34155d0.js" crossorigin="anonymous"></script>
+    <title>Weather YAPP</title>
+    <script src="sandbox.js" defer></script>
+</head>
+<body>
+    <div class="bg container-fluid" id="background">
+         
+        <div class="card">
+            <div id="head">
+                <h2 class="heading"><u>Weather From Yanyplace!</u></h2>
+                <a><h4 id="history" onclick="record()">&nbsp;History&nbsp;</h4></a>
+            </div>
+            <div class="d-flex flex-row justify-content-start pb-3 pt-2">
+                <input placeholder="Enter Latitude" class="input" id="input" data-search-lat/> 
+                <!-- <i class="fa-light fa-magnifying-glass-location"></i> -->
+                <div>&nbsp</div>
+                <input placeholder="Enter Longitude" class="input" data-search-lon/> 
+                <!-- <i class="fa-light fa-magnifying-glass-location"></i> -->
+            </div>
+            <button class="text-align-center border-2" onclick="myFunction()" data-search-button>Submit</button>
+            <div class="data text-left pt-3">
+            <p id="location"></p>
+            <p id="precipitation"></p>
+            <p id="temperature"></p>
+            <p id="humidity"></p>
+
+            <div class="d-none" id="hiddenContent"></div>
+            </div>
+        </div>
+    </div>
+    <div id="historyPage" class="d-none">
+        <div class="head">
+            <h1>HISTORY:</h1>
+        </div>
+        <div class="pt-2 pb-2">
+            <a><h4 class="back pb-1" id="back">Back</h4></a>
+            <a><h4 class="clear" id="clear">Clear Data</h4></a>
+        </div>
+        <div data-container>
+
+        </div>
+        
+    </body> 
+    </div>
+<template data-user-template>
+    <div class="card">
+        <h1 class="heading">Weather From Yanyplace!</h1>
+        <h6>ENTER LATITUDE AND LONGITUDE OF YANYPLACE:</h6>
+        <div class="d-flex flex-row justify-content-start">
+            <input placeholder="Enter Latitude" class="input" id="input" data-search-lat/> 
+            <i class="fa-light fa-magnifying-glass-location"></i>
+            <input placeholder="Enter Longitude" class="input" data-search-lon/> 
+            <i class="fa-light fa-magnifying-glass-location"></i>
+        </div>
+        <div class="data text-left pt-3">
+        <p id="location"></p>
+        <p id="temperature"></p>
+        <p id="humidity"></p>
+        <p id="precipitation"></p>
+        </div>
+    </div>
+</template>
+<template data-user-template-2>
+    <div class="box">
+        <p data-time></p>
+        <p data-description></p>
+        <p data-temperature></p>
+        <p data-humidity></p>
+        <p data-location></p>
+    </div>
+</template>
+</body>
+</html>
