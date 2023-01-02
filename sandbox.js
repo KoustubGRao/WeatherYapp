@@ -18,11 +18,14 @@ const searchLat = document.querySelector("[data-search-lat]");
 const searchLon = document.querySelector("[data-search-lon]");
 const searchButton = document.querySelector("[data-search-button]");
 
-let history=[];
 const histContainer = document.querySelector("[data-container]");
 const histCardTemplate = document.querySelector("[data-user-template-2]");
 
-history=JSON.parse(localStorage.getItem('history'));
+let history=[];
+
+
+if(!JSON.parse(localStorage.getItem('history')))
+{let history=JSON.parse(localStorage.getItem('history'));}
 
 if(navigator.geolocation){
 navigator.geolocation.getCurrentPosition((position) => {
@@ -34,11 +37,26 @@ navigator.geolocation.getCurrentPosition((position) => {
     .then(function(response){return response.json()})
     .then(function(jsonData){
         //console.log(jsonData);
+        localStorage.setItem('history',JSON.stringify(history));
         temperature.textContent='Temperature: '+jsonData.main.temp+'˚c';
         humidity.textContent='Humidity: '+jsonData.main.humidity+"%";
         precipitation.textContent=jsonData.weather[0].description.toUpperCase();
         place.textContent = 'Location: '+ jsonData.name;
         bg.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?"+jsonData.name+"')";  
+
+        let x;
+        x= JSON.stringify(new Date());
+        history.push(
+            {
+                location:jsonData.name,
+                description:jsonData.weather[0].description.toUpperCase(),
+                temperature:jsonData.main.temp+'˚c',
+                humidity:jsonData.main.humidity+"%",
+                time: x
+            });
+        // console.log(history);
+        localStorage.setItem('history',JSON.stringify(history));
+        //record();
     });    
 });
 }
@@ -82,29 +100,29 @@ function myFunction(){
         });
 };
 
-function record(){
-    document.getElementById("historyPage").classList.toggle("d-none");
-    document.getElementById("background").classList.toggle("d-none");
-    let h=localStorage.getItem('history');
-    h=JSON.parse(h);
-    console.log(h);
-    h.forEach(element => {
-        var histCard = histCardTemplate.content.cloneNode(true);
-        console.log(histCard);
-        const temperature_h = histCard.querySelector("[data-temperature]");
-        const time_h = histCard.querySelector("[data-time]");
-        const humidity_h = histCard.querySelector("[data-humidity]");
-        const description_h = histCard.querySelector("[data-description]");
-        const location_h = histCard.querySelector("[data-location]");
-        temperature_h.textContent = 'Temperature: '+ element.temperature;
-        // console.log(element.time.split("T")[0]);
-        time_h.textContent = "Day, Date & Time: "+element.time.split("T")[0].slice(1,11)+" "+element.time.split("T")[1].split(".")[0]+ " GMT ";
-        humidity_h.textContent = 'Humidity: '+element.humidity;
-        description_h.textContent = element.description.toUpperCase();
-        location_h.textContent = 'Location: '+ element.location;
-        histContainer.append(histCard);
-    });
-}
+// function record(){
+//     document.getElementById("historyPage").classList.toggle("d-none");
+//     document.getElementById("background").classList.toggle("d-none");
+//     let h=localStorage.getItem('history');
+//     h=JSON.parse(h);
+//     console.log(h);
+//     h.forEach(element => {
+//         var histCard = histCardTemplate.content.cloneNode(true);
+//         console.log(histCard);
+//         const temperature_h = histCard.querySelector("[data-temperature]");
+//         const time_h = histCard.querySelector("[data-time]");
+//         const humidity_h = histCard.querySelector("[data-humidity]");
+//         const description_h = histCard.querySelector("[data-description]");
+//         const location_h = histCard.querySelector("[data-location]");
+//         temperature_h.textContent = 'Temperature: '+ element.temperature;
+//         // console.log(element.time.split("T")[0]);
+//         time_h.textContent = "Day, Date & Time: "+element.time.split("T")[0].slice(1,11)+" "+element.time.split("T")[1].split(".")[0]+ " GMT ";
+//         humidity_h.textContent = 'Humidity: '+element.humidity;
+//         description_h.textContent = element.description.toUpperCase();
+//         location_h.textContent = 'Location: '+ element.location;
+//         histContainer.append(histCard);
+//     });
+// }
 
 
 document.getElementById("back").onclick= function(){
@@ -115,8 +133,9 @@ document.getElementById("back").onclick= function(){
 
 document.getElementById("clear").onclick= function(){
     histContainer.innerHTML="";
-    window.localStorage.removeItem('history');
+    localStorage.removeItem('history');
     history=[];
+    localStorage.setItem('history',JSON.stringify(history));
 }
 
 
