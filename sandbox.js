@@ -100,29 +100,29 @@ function myFunction(){
         });
 };
 
-// function record(){
-//     document.getElementById("historyPage").classList.toggle("d-none");
-//     document.getElementById("background").classList.toggle("d-none");
-//     let h=localStorage.getItem('history');
-//     h=JSON.parse(h);
-//     console.log(h);
-//     h.forEach(element => {
-//         var histCard = histCardTemplate.content.cloneNode(true);
-//         console.log(histCard);
-//         const temperature_h = histCard.querySelector("[data-temperature]");
-//         const time_h = histCard.querySelector("[data-time]");
-//         const humidity_h = histCard.querySelector("[data-humidity]");
-//         const description_h = histCard.querySelector("[data-description]");
-//         const location_h = histCard.querySelector("[data-location]");
-//         temperature_h.textContent = 'Temperature: '+ element.temperature;
-//         // console.log(element.time.split("T")[0]);
-//         time_h.textContent = "Day, Date & Time: "+element.time.split("T")[0].slice(1,11)+" "+element.time.split("T")[1].split(".")[0]+ " GMT ";
-//         humidity_h.textContent = 'Humidity: '+element.humidity;
-//         description_h.textContent = element.description.toUpperCase();
-//         location_h.textContent = 'Location: '+ element.location;
-//         histContainer.append(histCard);
-//     });
-// }
+function record(){
+    document.getElementById("historyPage").classList.toggle("d-none");
+    document.getElementById("background").classList.toggle("d-none");
+    let h=localStorage.getItem('history');
+    h=JSON.parse(h);
+    console.log(h);
+    h.forEach(element => {
+        var histCard = histCardTemplate.content.cloneNode(true);
+        console.log(histCard);
+        const temperature_h = histCard.querySelector("[data-temperature]");
+        const time_h = histCard.querySelector("[data-time]");
+        const humidity_h = histCard.querySelector("[data-humidity]");
+        const description_h = histCard.querySelector("[data-description]");
+        const location_h = histCard.querySelector("[data-location]");
+        temperature_h.textContent = 'Temperature: '+ element.temperature;
+        // console.log(element.time.split("T")[0]);
+        time_h.textContent = "Day, Date & Time: "+element.time.split("T")[0].slice(1,11)+" "+element.time.split("T")[1].split(".")[0]+ " GMT ";
+        humidity_h.textContent = 'Humidity: '+element.humidity;
+        description_h.textContent = element.description.toUpperCase();
+        location_h.textContent = 'Location: '+ element.location;
+        histContainer.append(histCard);
+    });
+}
 
 
 document.getElementById("back").onclick= function(){
